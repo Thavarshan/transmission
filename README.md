@@ -57,7 +57,7 @@ cp .env.example .env
 Generate a new application key
 
 ```bash
-php artisan key:generate
+./vendor/bin/sail php artisan key:generate
 ```
 
 Starting & Stopping Sail
@@ -85,22 +85,16 @@ To stop all of the containers, you may simply press Control + C to stop the cont
 Build the assets using npm
 
 ```bash
-npm install && npm run build
+./vendor/bin/sail npm install && ./vendor/bin/sail npm run build
 ```
 
 Run the database migrations (**Set the database connection in .env before migrating**) and seeders
 
 ```bash
-sail php artisan migrate:fresh --seed
+./vendor/bin/sail php artisan migrate:fresh --seed
 ```
 
-Start the local development server
-
-```bash
-sail php artisan serve
-```
-
-You can now access the server at <http://localhost:8000>
+You can now access the server at <http://localhost:3003>
 
 ## Usage
 
@@ -112,3 +106,11 @@ You may use the following credentials to login:
 | Email              | Passsword |
 | ------------------ | --------- |
 | <test@example.com> | password  |
+
+## Testing
+
+Transmission comes with a full suite of unit and feature tests. The tests may be run using the following commands:
+
+```bash
+./vendor/bin/sail php artisan test
+```
