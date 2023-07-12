@@ -60,6 +60,28 @@ Generate a new application key
 php artisan key:generate
 ```
 
+Starting & Stopping Sail
+
+Laravel Sail's `docker-compose.yml` file defines a variety of Docker containers that work together to help you build the application. Each of these containers is an entry within the services configuration of the `docker-compose.yml` file. The `laravel.test` container is the primary application container that will be serving the application.
+
+To start Sail run the following command from your project root:
+
+```bash
+./vendor/bin/sail up
+```
+
+To start all of the Docker containers in the background, you may start Sail in "detached" mode:
+
+```bash
+./vendor/bin/sail up -d
+```
+
+To stop all of the containers, you may simply press Control + C to stop the container's execution. Or, if the containers are running in the background, you may use the `stop` command:
+
+```bash
+./vendor/bin/sail stop
+```
+
 Build the assets using npm
 
 ```bash
@@ -69,13 +91,13 @@ npm install && npm run build
 Run the database migrations (**Set the database connection in .env before migrating**) and seeders
 
 ```bash
-php artisan migrate:fresh --seed
+sail php artisan migrate:fresh --seed
 ```
 
 Start the local development server
 
 ```bash
-php artisan serve
+sail php artisan serve
 ```
 
 You can now access the server at <http://localhost:8000>
