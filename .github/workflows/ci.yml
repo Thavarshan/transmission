@@ -19,7 +19,7 @@ jobs:
         image: mysql:latest
         env:
           MYSQL_ALLOW_EMPTY_PASSWORD: yes
-          MYSQL_DATABASE:  transmission
+          MYSQL_DATABASE:  testing
         ## map the "external" 33306 port with the "internal" 3306
         ports:
           - 33306:3306
@@ -81,7 +81,7 @@ jobs:
     - name: Run Migrations
       env:
         DB_CONNECTION: mysql
-        DB_DATABASE: transmission
+        DB_DATABASE: testing
         DB_PORT: 33306
         DB_USER: root
 
@@ -111,7 +111,8 @@ jobs:
     - name: Execute tests (Unit and Feature tests) via PHPUnit
       env:
         DB_CONNECTION: mysql
-        DB_DATABASE: transmission
+        DB_HOST: mysql
+        DB_DATABASE: testing
         DB_PORT: 33306
         DB_USER: root
 
