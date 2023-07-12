@@ -82,6 +82,7 @@ jobs:
       env:
         DB_CONNECTION: mysql
         DB_DATABASE: testing
+        DB_HOST: mysql
         DB_PORT: 33306
         DB_USER: root
 
