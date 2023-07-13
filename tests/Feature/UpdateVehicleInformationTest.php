@@ -32,7 +32,7 @@ class UpdateVehicleInformationTest extends VehicleTestCase
             'registration' => 'ABC123',
         ]);
 
-        $response->assertStatus(Response::HTTP_FOUND)->assertRedirect('/vehicles');
+        $response->assertStatus(Response::HTTP_FOUND)->assertRedirect('/home');
 
         $this->assertDatabaseHas('vehicles', [
             'registration' => 'ABC123',

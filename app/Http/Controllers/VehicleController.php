@@ -54,7 +54,7 @@ class VehicleController extends Controller
             ]);
         }
 
-        return Inertia::render('Dashboard', [
+        return Inertia::render('Home', [
             'filterables' => $filterables,
             'vehicles' => $vehicles,
         ]);
@@ -89,9 +89,7 @@ class VehicleController extends Controller
             ], Response::HTTP_CREATED);
         }
 
-        return redirect()
-            ->route('vehicles.index')
-            ->with('success', 'Vehicle created.');
+        return Inertia::location(route('home'));
     }
 
     /**
@@ -136,9 +134,7 @@ class VehicleController extends Controller
             ]);
         }
 
-        return redirect()
-            ->route('vehicles.index')
-            ->with('success', 'Vehicle updated.');
+        return Inertia::location(route('home'));
     }
 
     /**
@@ -158,8 +154,6 @@ class VehicleController extends Controller
             return response()->json('', Response::HTTP_NO_CONTENT);
         }
 
-        return redirect()
-            ->route('vehicles.index')
-            ->with('success', 'Vehicle deleted.');
+        return Inertia::location(route('home'));
     }
 }

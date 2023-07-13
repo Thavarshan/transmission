@@ -6,7 +6,7 @@ use App\Http\Controllers\VehicleController;
 
 Route::get('/', fn () => redirect()->route('login'));
 
-Route::get('/dashboard', [VehicleController::class, 'index'])->middleware(['auth'])->name('dashboard');
+Route::get('/home', [VehicleController::class, 'index'])->middleware(['auth'])->name('home');
 Route::resource('vehicles', VehicleController::class, [
     'except' => ['create', 'edit'],
 ])->middleware(['auth']);

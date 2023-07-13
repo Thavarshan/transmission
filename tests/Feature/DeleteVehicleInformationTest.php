@@ -30,7 +30,7 @@ class DeleteVehicleInformationTest extends VehicleTestCase
 
         $response = $this->delete('/vehicles/' . $this->vehicle->id);
 
-        $response->assertStatus(Response::HTTP_FOUND)->assertRedirect('/vehicles');
+        $response->assertStatus(Response::HTTP_FOUND)->assertRedirect('/home');
 
         $this->assertDatabaseMissing('vehicles', [
             'id' => $this->vehicle->id,

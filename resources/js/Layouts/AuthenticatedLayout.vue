@@ -1,13 +1,50 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, nextTick } from 'vue';
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
 import NavLink from '@/Components/NavLink.vue';
+import InputLabel from '@/Components/InputLabel.vue';
+import InputError from '@/Components/InputError.vue';
+import TextInput from '@/Components/TextInput.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
-import { Link } from '@inertiajs/vue3';
+import Modal from '@/Components/Modal.vue';
+import { Link, useForm } from '@inertiajs/vue3';
+import { PlusCircleIcon } from '@heroicons/vue/24/solid';
+import PrimaryButton from '@/Components/PrimaryButton.vue';
+import SecondaryButton from '@/Components/SecondaryButton.vue';
 
 const showingNavigationDropdown = ref(false);
+const addingNewVehicle = ref(false);
+const modelInput = ref(null);
+
+const form = useForm({
+    model: '',
+    make: '',
+    registration: '',
+});
+
+const openAddNewVehicle = () => {
+    addingNewVehicle.value = true;
+
+    nextTick(() => modelInput.value.focus());
+};
+
+const addNewVehicle = () => {
+    form.post(route('vehicles.store'), {
+        preserveScroll: true,
+        onSuccess: () => closeAddNewVehicleModal(),
+        onError: () => modelInput.value.focus(),
+        onFinish: () => form.reset(),
+    });
+};
+
+const closeAddNewVehicleModal = () => {
+    addingNewVehicle.value = false;
+
+    form.clearErrors();
+    form.reset();
+};
 </script>
 
 <template>
@@ -20,7 +57,7 @@ const showingNavigationDropdown = ref(false);
                         <div class="flex">
                             <!-- Logo -->
                             <div class="shrink-0 flex items-center">
-                                <Link :href="route('dashboard')">
+                                <Link :href="route('home')">
                                     <ApplicationLogo
                                         class="block h-9 w-auto fill-current text-gray-800"
                                     />
@@ -29,13 +66,21 @@ const showingNavigationDropdown = ref(false);
 
                             <!-- Navigation Links -->
                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
-                                    Dashboard
-                                </NavLink>
+                                <!-- <NavLink :href="route('home')" :active="route().current('home')">
+                                    Home
+                                </NavLink> -->
                             </div>
                         </div>
 
                         <div class="hidden sm:flex sm:items-center sm:ml-6">
+                            <button
+                                type="button"
+                                @click="openAddNewVehicle"
+                                class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                                <PlusCircleIcon class="-ml-0.5 mr-2 h-4 w-4" aria-hidden="true" />
+                                <span>Add Vehicle</span>
+                            </button>
+
                             <!-- Settings Dropdown -->
                             <div class="ml-3 relative">
                                 <Dropdown align="right" width="48">
@@ -72,6 +117,80 @@ const showingNavigationDropdown = ref(false);
                                 </Dropdown>
                             </div>
                         </div>
+
+                        <!-- Add New Vehicle Modal -->
+                        <Modal maxWidth="xl" :show="addingNewVehicle" @close="closeAddNewVehicleModal">
+                            <div class="p-6">
+                                <h2 class="text-lg font-medium text-gray-900">
+                                    Add New Vehicle Information
+                                </h2>
+
+                                <p class="mt-1 text-sm text-gray-600">
+                                    The information provided will be used to create a new vehicle registration and presisted to the database.
+                                </p>
+
+                                <div class="mt-6 md:grid md:grid-cols-12 md:gap-6">
+                                    <div class="col-span-6">
+                                        <InputLabel for="model" value="Model" class="sr-only" />
+
+                                        <TextInput
+                                            id="model"
+                                            required="true"
+                                            ref="modelInput"
+                                            v-model="form.model"
+                                            type="text"
+                                            class="mt-1 block w-full"
+                                            placeholder="Model"
+                                        />
+
+                                        <InputError :message="form.errors.model" class="mt-2" />
+                                    </div>
+
+                                    <div class="col-span-6">
+                                        <InputLabel for="make" value="Make" class="sr-only" />
+
+                                        <TextInput
+                                            id="make"
+                                            required="true"
+                                            v-model="form.make"
+                                            type="text"
+                                            class="mt-1 block w-full"
+                                            placeholder="Make"
+                                        />
+
+                                        <InputError :message="form.errors.make" class="mt-2" />
+                                    </div>
+                                </div>
+
+                                <div class="mt-4">
+                                    <InputLabel for="registration" value="Registration" class="sr-only" />
+
+                                    <TextInput
+                                        id="registration"
+                                        required="true"
+                                        v-model="form.registration"
+                                        type="text"
+                                        class="mt-1 block w-full"
+                                        placeholder="Registration"
+                                    />
+
+                                    <InputError :message="form.errors.registration" class="mt-2" />
+                                </div>
+
+                                <div class="mt-6 flex justify-end">
+                                    <SecondaryButton @click="closeAddNewVehicleModal">Cancel</SecondaryButton>
+
+                                    <PrimaryButton
+                                        class="ml-3"
+                                        :class="{ 'opacity-25': form.processing }"
+                                        :disabled="form.processing"
+                                        @click="addNewVehicle"
+                                    >
+                                        Add
+                                    </PrimaryButton>
+                                </div>
+                            </div>
+                        </Modal>
 
                         <!-- Hamburger -->
                         <div class="-mr-2 flex items-center sm:hidden">
@@ -112,9 +231,9 @@ const showingNavigationDropdown = ref(false);
                     class="sm:hidden"
                 >
                     <div class="pt-2 pb-3 space-y-1">
-                        <ResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">
-                            Dashboard
-                        </ResponsiveNavLink>
+                        <!-- <ResponsiveNavLink :href="route('home')" :active="route().current('home')">
+                            Home
+                        </ResponsiveNavLink> -->
                     </div>
 
                     <!-- Responsive Settings Options -->

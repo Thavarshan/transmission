@@ -68,7 +68,7 @@ const filterSearch = () => {
         .map((key) => `${key}=${encodeURIComponent(query[key])}`)
         .join('&');
 
-    router.get(`${window.location.origin}/dashboard?${queryString}`);
+    router.get(`${window.location.origin}/home?${queryString}`);
 };
 
 const resetFilter = () => {
@@ -76,12 +76,12 @@ const resetFilter = () => {
     form.make = undefined;
     form.registration = '';
 
-    router.get(`${window.location.origin}/dashboard`);
+    router.get(`${window.location.origin}/home`);
 };
 </script>
 
 <template>
-    <Head title="Dashboard" />
+    <Head title="Home" />
 
     <AuthenticatedLayout>
         <div class="py-6 space-y-6">

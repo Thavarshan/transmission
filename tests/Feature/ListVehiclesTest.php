@@ -29,7 +29,7 @@ class ListVehiclesTest extends VehicleTestCase
     {
         $this->withAuthenticatedUser();
 
-        $response = $this->get('/dashboard');
+        $response = $this->get('/home');
 
         $response->assertStatus(Response::HTTP_OK);
     }
@@ -38,7 +38,7 @@ class ListVehiclesTest extends VehicleTestCase
     {
         $this->withAuthenticatedUser();
 
-        $response = $this->getJson('/dashboard');
+        $response = $this->getJson('/home');
 
         $response->assertStatus(Response::HTTP_OK);
 
@@ -50,7 +50,7 @@ class ListVehiclesTest extends VehicleTestCase
     {
         $this->withAuthenticatedUser();
 
-        $response = $this->getJson('/dashboard?registration=ABC123');
+        $response = $this->getJson('/home?registration=ABC123');
 
         $response->assertStatus(Response::HTTP_OK);
 
