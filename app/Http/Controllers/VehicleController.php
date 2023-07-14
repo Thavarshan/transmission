@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Filters\VehicleFilter;
 use App\Services\VehicleService;
+use Illuminate\Http\JsonResponse;
 use Inertia\Response as InertiaResponse;
 use App\Http\Requests\StoreVehicleRequest;
 use App\Http\Requests\UpdateVehicleRequest;
@@ -97,19 +98,13 @@ class VehicleController extends Controller
      *
      * @param \App\Models\Vehicle $vehicle
      *
-     * @return \Illuminate\Http\Response|\Inertia\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function show(Vehicle $vehicle)
+    public function show(Vehicle $vehicle): JsonResponse
     {
         $this->authorize('viewAny', $vehicle);
 
-        if (request()->wantsJson()) {
-            return response()->json($vehicle);
-        }
-
-        return Inertia::render('Vehicles/Show', [
-            'vehicle' => $vehicle,
-        ]);
+        return new JsonResponse($vehicle);
     }
 
     /**

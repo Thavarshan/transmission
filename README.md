@@ -2,7 +2,7 @@
 
 ![transmission](public/images/screenshot.png)
 
-Trasmission is a web application that allows users to search for cars by make, model, and registration. The application uses a REST API to retrieve the data. The application UI is built using VueJS and TailwindCSS.
+Trasmission is a web application that allows users to search for vehicles by make, model, and registration. The application uses a REST API to retrieve the data. The application UI is built using VueJS and TailwindCSS.
 
 ## Features
 
@@ -10,19 +10,35 @@ Trasmission is a web application that allows users to search for cars by make, m
 
 ![filter-make](public/images/filter-make.png)
 
-The app allows users to filter cars by make. The user can select a make from the dropdown menu and the app will display all cars that match the selected make.
+The app allows users to filter vehicles by make. The user can select a make from the dropdown menu and the app will display all vehicles that match the selected make.
 
 ### Filter by Model
 
 ![filter-model](public/images/filter-model.png)
 
-The app allows users to filter cars by model. The user can select a model from the dropdown menu and the app will display all cars that match the selected model.
+The app allows users to filter vehicles by model. The user can select a model from the dropdown menu and the app will display all vehicles that match the selected model.
 
 ### Filter by Registration
 
-![filter-make-reg](public/images/filter-make-reg.png)
+![filter-make-reg](public/images/filter-reg.png)
 
-The app allows users to filter cars by registration. The user can enter a registration number and the app will display all cars that match the entered registration number.
+The app allows users to filter vehicles by registration. The user can enter a registration number and the app will display all vehicles that match the entered registration number.
+
+### Add New Vehicle
+
+![add](public/images/add.png)
+
+The app allows users to add new vehicles. The user can click on the "Add Vehicle" button and enter the vehicle details in the modal. The app will validate the entered data and display any errors. If the data is valid, the app will add the vehicle to the database and display a success message.
+
+### Update Vehicle
+
+![update-delete-vehicle](public/images/update-delete-vehicle.png)
+
+The app allows users to edit existing vehicles. The user can click on the "Registration" number of the vehicle to be updated and enter the vehicle details in the modal. The app will validate the entered data and display any errors. If the data is valid, the app will update the vehicle in the database and display a success message.
+
+### Delete Vehicle
+
+The update modal also allows users to delete vehicles. The user can click on the "Delete" button to delete the vehicle.
 
 ## Installation
 

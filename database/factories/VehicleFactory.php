@@ -26,7 +26,7 @@ class VehicleFactory extends Factory
         return [
             'make' => $this->faker->randomElement($data->pluck('make')->toArray()),
             'model' => $this->faker->randomElement($data->pluck('model')->toArray()),
-            'registration' => Str::random(10),
+            'registration' => Str::upper(Str::random(10)),
         ];
     }
 }
