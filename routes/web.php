@@ -9,7 +9,7 @@ Route::get('/', fn () => redirect()->route('login'));
 Route::get('/home', [VehicleController::class, 'index'])
     ->middleware(['auth'])->name('home');
 Route::resource('vehicles', VehicleController::class, [
-    'only' => ['store', 'update', 'destroy'],
+    'only' => ['store', 'update', 'destroy', 'show'],
 ])->middleware(['auth']);
 
 Route::middleware('auth')->group(function () {

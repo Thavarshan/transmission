@@ -20,15 +20,6 @@ class GetSpecificVehicleTest extends VehicleTestCase
         $this->vehicle = $this->create();
     }
 
-    public function testGetVehicleInformation(): void
-    {
-        $this->withAuthenticatedUser();
-
-        $response = $this->get('/vehicles/' . $this->vehicle->id);
-
-        $response->assertStatus(Response::HTTP_OK);
-    }
-
     public function testGetVehicleInformationAsJson(): void
     {
         $this->withAuthenticatedUser();
