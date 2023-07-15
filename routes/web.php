@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\VehicleController;
 
@@ -21,9 +20,5 @@ Route::middleware('auth')->group(function (): void {
     Route::delete('/profile', [ProfileController::class, 'destroy'])
         ->name('profile.destroy');
 });
-
-Route::get('/migrate', function (): void {
-    Artisan::call('migrate:fresh', ['--seed' => true]);
-})->name('migrate');
 
 require __DIR__ . '/auth.php';
