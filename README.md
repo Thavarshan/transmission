@@ -4,6 +4,9 @@
 
 Trasmission is a web application that allows users to search for vehicles by make, model, and registration. The application uses a REST API to retrieve the data. The application UI is built using VueJS and TailwindCSS.
 
+Demo application is hosted on [Fly.io](https://fly.io).
+Find the demo application on: <hhttps://transmission.fly.dev>
+
 ## Features
 
 ### Filter by Make
