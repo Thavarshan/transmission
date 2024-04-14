@@ -2,15 +2,12 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
 use App\Models\User;
 use App\Models\Vehicle;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class VehicleTestCase extends TestCase
 {
-    use RefreshDatabase;
-
     /**
      * Create and authenticate new user for testing purposes.
      *

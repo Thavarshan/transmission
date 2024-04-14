@@ -3,12 +3,9 @@
 namespace Tests\Feature;
 
 use Illuminate\Http\Response;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class SaveNewVehicleInformationTest extends VehicleTestCase
 {
-    use RefreshDatabase;
-
     public function testCreateNewVehicleEntry(): void
     {
         $this->withAuthenticatedUser();

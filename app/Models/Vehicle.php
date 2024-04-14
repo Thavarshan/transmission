@@ -2,14 +2,15 @@
 
 namespace App\Models;
 
-use App\Models\Traits\Filterable;
-use Illuminate\Database\Eloquent\Model;
+use Filterable\Interfaces\Filterable as FilterableInterface;
+use Filterable\Traits\Filterable as FilterableTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-class Vehicle extends Model
+class Vehicle extends Model implements FilterableInterface
 {
     use HasFactory;
-    use Filterable;
+    use FilterableTrait;
 
     /**
      * The attributes that are mass assignable.

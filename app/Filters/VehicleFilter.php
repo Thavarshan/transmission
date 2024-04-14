@@ -2,6 +2,7 @@
 
 namespace App\Filters;
 
+use Filterable\Filter;
 use Illuminate\Database\Eloquent\Builder;
 
 class VehicleFilter extends Filter
@@ -9,9 +10,9 @@ class VehicleFilter extends Filter
     /**
      * Registered filters to operate upon.
      *
-     * @var array
+     * @var array<string>
      */
-    protected $filters = [
+    protected array $filters = [
         'make',
         'model',
         'registration',

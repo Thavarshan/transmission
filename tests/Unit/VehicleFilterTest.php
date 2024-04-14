@@ -26,7 +26,7 @@ class VehicleFilterTest extends TestCase
                 'model' => 'R8',
                 'registration' => '123',
             ],
-            $vehicleFilter->getFilters()
+            $vehicleFilter->getFilterables()
         );
     }
 
@@ -35,7 +35,7 @@ class VehicleFilterTest extends TestCase
         $request = Request::create('/', 'GET');
         $vehicleFilter = new VehicleFilter($request);
 
-        $this->assertEquals([], $vehicleFilter->getFilters());
+        $this->assertEquals([], $vehicleFilter->getFilterables());
     }
 
     public function testApplyFilters(): void
@@ -48,6 +48,7 @@ class VehicleFilterTest extends TestCase
             ->andReturnSelf();
 
         $vehicleFilter = new VehicleFilter($request);
+        $vehicleFilter->setUseCache(false);
 
         $builder = $vehicleFilter->apply($builder);
 
