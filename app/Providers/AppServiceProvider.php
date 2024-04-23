@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Filterable\Filter;
 use Illuminate\Routing\UrlGenerator;
 use Illuminate\Support\ServiceProvider;
 
@@ -28,5 +29,7 @@ class AppServiceProvider extends ServiceProvider
         if ('production' == env('APP_ENV')) {
             $url->forceScheme('https');
         }
+
+        Filter::disableCaching();
     }
 }

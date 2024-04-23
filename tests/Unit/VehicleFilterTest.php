@@ -2,11 +2,12 @@
 
 namespace Tests\Unit;
 
-use Mockery as m;
-use Illuminate\Http\Request;
 use App\Filters\VehicleFilter;
-use PHPUnit\Framework\TestCase;
+use Filterable\Filter;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\Request;
+use Mockery as m;
+use PHPUnit\Framework\TestCase;
 
 class VehicleFilterTest extends TestCase
 {
@@ -40,6 +41,8 @@ class VehicleFilterTest extends TestCase
 
     public function testApplyFilters(): void
     {
+        Filter::disableCaching();
+
         $request = Request::create('/?make=Camri', 'GET');
         $builder = m::mock(Builder::class);
         $builder->shouldReceive('where')
@@ -48,7 +51,6 @@ class VehicleFilterTest extends TestCase
             ->andReturnSelf();
 
         $vehicleFilter = new VehicleFilter($request);
-        $vehicleFilter->setUseCache(false);
 
         $builder = $vehicleFilter->apply($builder);
 
